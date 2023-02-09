@@ -185,7 +185,7 @@ function request(replyToken, message) {
 }
 
 function isUniqId(test) {
-  const regex = /\d{2}[-]\d{10}/g
+  const regex = /\d{1,2}[-]\d{10}/g
   return test.match(regex)
 }
 
