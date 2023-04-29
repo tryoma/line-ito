@@ -48,7 +48,10 @@ app.get('/', (req, res) => {
 })
 
 app.post('/webhook', async (req, res) => {
-  console.log(req)
+  console.log(req.body)
+  if (req.body.events.length === 0) {
+    return res.sendStatus(200)
+  }
   // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
   if (req.body.events[0].type === 'message') {
     let lineText = req.body.events[0].message.text || ''
