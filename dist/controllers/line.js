@@ -67,7 +67,9 @@ const lineEndpoint = async (req, res, next) => {
     if (event.type === 'message' && event.message.type === 'text') {
         if (event.message.text === '新規') {
             const title = records[1 + Math.floor(Math.random() * (records.length - 1))][0];
-            const uniqId = Math.floor(Math.random() * 101) + '-' + currentTime.format('YYYYMMDDHH');
+            const uniqId = Math.floor(Math.random() * 101) +
+                '-' +
+                currentTime.format('YYYYMMDDHH');
             const newNum = 1 + Math.floor(Math.random() * 8);
             const saveData = {
                 title: title,
