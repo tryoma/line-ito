@@ -6,11 +6,11 @@ const moment = require('moment')
 const currentTime = moment()
 const mongoose = require('mongoose')
 const fs = require('fs')
-const parse = require('csv-parse/sync');
-const data = fs.readFileSync('ito.csv');
+const parse = require('csv-parse/sync')
+const data = fs.readFileSync('ito.csv')
 const records = parse.parse(data, {
-    columns: false
-});
+  columns: false,
+})
 
 const PORT = process.env.PORT || 3000
 const TOKEN = process.env.LINE_ACCESS_TOKEN
@@ -22,12 +22,10 @@ app.use(
   })
 )
 
-mongoose.set('strictQuery', true);
+mongoose.set('strictQuery', true)
 
 mongoose
-  .connect(
-    process.env.MONGO_DB
-  )
+  .connect(process.env.MONGO_DB)
   .then(() => {
     console.log('success!')
   })
@@ -50,6 +48,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/webhook', async (req, res) => {
+  console.log(req)
   // ユーザーがボットにメッセージを送った場合、返信メッセージを送る
   if (req.body.events[0].type === 'message') {
     let lineText = req.body.events[0].message.text || ''
@@ -57,7 +56,7 @@ app.post('/webhook', async (req, res) => {
 
     if (lineText === '新規') {
       const title = records[Math.floor(Math.random() * records.length)][0]
-      const uniqId = 
+      const uniqId =
         Math.floor(Math.random() * 101) + '-' + currentTime.format('YYYYMMDDHH')
       const newNum = Math.floor(Math.random() * 101)
       const saveData = {
@@ -138,7 +137,6 @@ app.post('/webhook', async (req, res) => {
         ]
         request(replyToken, messages)
       }
-
     } else {
       messages = [
         {
