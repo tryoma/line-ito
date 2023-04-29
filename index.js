@@ -48,7 +48,6 @@ app.get('/', (req, res) => {
 })
 
 app.post('/webhook', async (req, res) => {
-  console.log(req.body)
   if (req.body.events.length === 0) {
     return res.sendStatus(200)
   }
