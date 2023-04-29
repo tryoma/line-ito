@@ -60,6 +60,10 @@ const config = {
 };
 const client = new line.Client(config);
 const lineEndpoint = async (req, res, next) => {
+    console.log(req.body.events);
+    if (req.body.events.length === 0) {
+        return res.status(201);
+    }
     const event = req.body.events[0];
     if (event.type === 'message' && event.message.type === 'text') {
         if (event.message.text === '新規') {
